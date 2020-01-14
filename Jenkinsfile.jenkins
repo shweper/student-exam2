@@ -30,7 +30,7 @@ pipeline {
                     sh 'docker build -t 030 398/exam:web .'
                 }
             
-            }
+            
   
             steps{
                 echo "=======Start docker login======="
