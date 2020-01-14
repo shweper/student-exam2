@@ -24,6 +24,8 @@ pipeline {
             """
             }
         }
+    }
+    stages{
         stage(Build_docker_image) {
             steps{
                 echo "=======Start Build docker image======="
@@ -33,6 +35,8 @@ pipeline {
             
             }
         }
+    }
+    stages{
         stage(docker_login){
             steps{
                 echo "=======Start docker login======="
@@ -42,7 +46,8 @@ pipeline {
                 """
                 }
             }
-
+        }
+      stages{
         stage(push_docker_image){
             steps{
                 echo "=======Start push docker image======="
