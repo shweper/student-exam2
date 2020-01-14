@@ -11,24 +11,22 @@ pipeline {
     }
     stages {
         stage(start python test) {
-        
+            sh 'apk add docker'
+            sh 'apk add git'
+            sh 'mkdir web'
+            sh 'cd web'
+            sh 'git clone https://github.com/shweper/student-exam2.git'
+            sh """
+            pip install -e '.[test]' &&
+            coverage run -m pytest &&
+            coverage report
+            """
         }
         stage(Build docker image) {
             steps{
                 echo "=======Start Build docker image======="
                 dir ('.'){
-                    sh 'apk add docker'
-                    sh 'apk add git'
-                    sh 'mkdir web'
-                    sh 'cd web'
-                    sh 'git clone https://github.com/shweper/student-exam2.git'
-                    sh """
-                    pip install -e '.[test]' &&
-                    coverage run -m pytest &&
-                    coverage report
-                    """
                     sh 'docker build -t 030 398/exam:web .'
-                    
                 }
             
             }
