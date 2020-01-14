@@ -10,7 +10,7 @@ pipeline {
     timestamps()
     }
     stages {
-        stage(start_python_test) {
+        stage(start_CI) {
             steps{
             sh 'apk add docker'
             sh 'apk add git'
@@ -23,10 +23,7 @@ pipeline {
             coverage report
             """
             }
-        }
-    }
-    stages{
-        stage(Build_docker_image) {
+
             steps{
                 echo "=======Start Build docker image======="
                 dir ('.'){
@@ -34,10 +31,7 @@ pipeline {
                 }
             
             }
-        }
-    }
-    stages{
-        stage(docker_login){
+  
             steps{
                 echo "=======Start docker login======="
                 withCredentials([usernamePassword(credentialsId: 'Auth-DockerHub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
@@ -45,10 +39,7 @@ pipeline {
                 docker login -u $USERNAME -p $PASSWORD
                 """
                 }
-            }
-        }
-      stages{
-        stage(push_docker_image){
+
             steps{
                 echo "=======Start push docker image======="
                 sh '''
