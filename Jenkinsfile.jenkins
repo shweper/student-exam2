@@ -10,7 +10,7 @@ pipeline {
     timestamps()
     }
     stages {
-        stage(start_CI) {
+        stage('start_python_test') {
             steps{
             sh 'apk add docker'
             sh 'apk add git'
@@ -23,15 +23,15 @@ pipeline {
             coverage report
             """
             }
-
+        }
+       stage('Build docker image') {
             steps{
                 echo "=======Start Build docker image======="
                 dir ('.'){
                     sh 'docker build -t 030 398/exam:web .'
                 }
-            
-            
-  
+            }
+        stage('docker login'){
             steps{
                 echo "=======Start docker login======="
                 withCredentials([usernamePassword(credentialsId: 'Auth-DockerHub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
@@ -39,12 +39,14 @@ pipeline {
                 docker login -u $USERNAME -p $PASSWORD
                 """
                 }
-
+            }
+stage('push docker image'){
             steps{
                 echo "=======Start push docker image======="
                 sh '''
                 docker push 030398/exam:web
                 '''
+            }
             }
         }
 
