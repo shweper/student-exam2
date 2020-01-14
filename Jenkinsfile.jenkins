@@ -11,6 +11,7 @@ pipeline {
     }
     stages {
         stage(start_python_test) {
+            steps{
             sh 'apk add docker'
             sh 'apk add git'
             sh 'mkdir web'
@@ -21,6 +22,7 @@ pipeline {
             coverage run -m pytest &&
             coverage report
             """
+            }
         }
         stage(Build_docker_image) {
             steps{
