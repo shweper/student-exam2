@@ -53,4 +53,3 @@ stage('push docker image'){
     }
 }
 }
-}
