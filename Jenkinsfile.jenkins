@@ -9,7 +9,7 @@ pipeline {
             steps{
             sh 'mkdir -p web'
             sh 'cd web'
-            sh 'git clone https://github.com/shweper/student-exam2.git'
+            sh 'git clone  --recursive https://github.com/shweper/student-exam2.git'
             sh 'cd student-exam2/'
             sh """
             pip install -e '.[test]' &&
