@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('start_python_test') {
             steps{
-            sh 'mkdir web'
+            sh 'mkdir -p web'
             sh 'cd web'
             sh 'git clone https://github.com/shweper/student-exam2.git'
             sh """
