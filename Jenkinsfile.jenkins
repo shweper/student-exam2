@@ -7,10 +7,9 @@ pipeline {
     stages {
         stage('start_python_test') {
             steps{    
-            sh 'mkdir -p web-prog'
-            sh 'cd web-prog'
             sh 'git clone  --recursive https://github.com/shweper/student-exam2.git'
             sh 'cd student-exam2/'
+            sh 'mv -v ./* ..'
             sh """
             python3 -m venv venv
             . venv/bin/activate
