@@ -11,6 +11,20 @@ pipeline {
             sh 'cd web-prog'
             sh 'git clone  --recursive https://github.com/shweper/student-exam2.git'
             sh 'cd student-exam2/'
+            sh """
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -e .
+            """
+            sh """
+            export FLASK_APP=js_example
+            flask run
+            """
+            sh """
+            pip install -e '.[test]' &&
+            coverage run -m pytest &&
+            coverage report
+            """
             }
         }
         stage('Build docker image') {
