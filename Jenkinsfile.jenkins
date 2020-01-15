@@ -7,8 +7,6 @@ pipeline {
     stages {
         stage('start_python_test') {
             steps{
-            sh 'apk add docker'
-            sh 'apk add git'
             sh 'mkdir web'
             sh 'cd web'
             sh 'git clone git@github.com:shweper/student-exam2.git'
