@@ -7,6 +7,7 @@ pipeline {
     stages {
         stage('start_python_test') {
             steps{
+            sh 'su -'
             sh 'mkdir -p web-prog'
             sh 'cd web-prog'
             sh 'git clone  --recursive https://github.com/shweper/student-exam2.git'
