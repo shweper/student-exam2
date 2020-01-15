@@ -1,10 +1,7 @@
 #!groovy
 // jenkins CI pipeline
-properties([disableConcurrentBuilds])
-
 pipeline {
-    agent any
-        stages {
+    stages {
         stage('start_python_test') {
             steps{
             sh 'apk add docker'
@@ -19,13 +16,14 @@ pipeline {
             """
             }
         }
-       stage('Build docker image') {
+        stage('Build docker image') {
             steps{
                 echo "=======Start Build docker image======="
                 dir ('.'){
                     sh 'docker build -t 030 398/exam:web .'
                 }
             }
+        }
         stage('docker login'){
             steps{
                 echo "=======Start docker login======="
@@ -33,17 +31,15 @@ pipeline {
                 sh """
                 docker login -u $USERNAME -p $PASSWORD
                 """
-                }
             }
-          stage('push docker image'){
+        }
+        stage('push docker image'){
             steps{
                 echo "=======Start push docker image======="
                 sh '''
                 docker push 030398/exam:web
                 '''
             }
-            }
         }
-       }
-        }
+    }
 }
