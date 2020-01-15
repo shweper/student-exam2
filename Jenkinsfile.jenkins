@@ -18,7 +18,7 @@ pipeline {
             """
             sh """
             export FLASK_APP=js_example
-            flask run
+            flask run --host=0.0.0.0
             """
             sh """
             pip install -e '.[test]' &&
