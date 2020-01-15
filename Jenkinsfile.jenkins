@@ -1,6 +1,9 @@
 #!groovy
 // jenkins CI pipeline
 pipeline {
+    agent{
+        label 'agent'
+    }
     stages {
         stage('start_python_test') {
             steps{
