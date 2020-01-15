@@ -4,7 +4,7 @@ properties([disableConcurrentBuilds])
 
 pipeline {
     agent any
-    
+        stages {
         stage('start_python_test') {
             steps{
             sh 'apk add docker'
@@ -44,6 +44,4 @@ stage('push docker image'){
             }
             }
         }
-
-    }
-}
+       }
