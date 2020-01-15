@@ -5,7 +5,7 @@ properties([disableConcurrentBuilds])
 pipeline {
     agent any
         stages {
-        agent('start_python_test') {
+        stage('start_python_test') {
             steps{
             sh 'apk add docker'
             sh 'apk add git'
@@ -19,14 +19,14 @@ pipeline {
             """
             }
         }
-       agent('Build docker image') {
+       stage('Build docker image') {
             steps{
                 echo "=======Start Build docker image======="
                 dir ('.'){
                     sh 'docker build -t 030 398/exam:web .'
                 }
             }
-        agent('docker login'){
+        stage('docker login'){
             steps{
                 echo "=======Start docker login======="
                 withCredentials([usernamePassword(credentialsId: 'Auth-DockerHub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
@@ -35,7 +35,7 @@ pipeline {
                 """
                 }
             }
-agent('push docker image'){
+          stage('push docker image'){
             steps{
                 echo "=======Start push docker image======="
                 sh '''
