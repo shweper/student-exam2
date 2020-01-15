@@ -7,6 +7,8 @@ pipeline {
     stages {
         stage('start_python_test') {
             steps{
+            sh 'apk add docker'
+            sh 'apk add py3-pip'    
             sh 'mkdir -p web-prog'
             sh 'cd web-prog'
             sh 'git clone  --recursive https://github.com/shweper/student-exam2.git'
