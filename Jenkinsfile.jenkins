@@ -13,8 +13,6 @@ pipeline {
             python3 -m venv venv
             . venv/bin/activate
             pip install -e .
-            """
-            sh """
             coverage run -m pytest &&
             coverage report
             """
