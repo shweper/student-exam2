@@ -1,12 +1,17 @@
 #!groovy
 // jenkins CI pipeline
 pipeline {
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
     agent{
         label 'agent'
     }
     stages {
         stage('start_python_test') {
-            steps{    
+            steps{  
+            sh 'rm -rf student-exam2'
             sh 'git clone https://github.com/shweper/student-exam2.git'
             sh 'cd student-exam2/'
             sh """
