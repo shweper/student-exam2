@@ -22,7 +22,7 @@ pipeline {
             steps{
                 echo "=======Start Build docker image======="
                 dir ('.'){
-                    sh 'docker build -t 030398/exam:web .'
+                    sh 'docker build -t 030398/exam:web2 .'
                 }
             }
         }
@@ -40,7 +40,7 @@ pipeline {
             steps{
                 echo "=======Start push docker image======="
                 sh '''
-                docker push 030398/exam:web
+                docker push 030398/exam:web2
                 '''
             }
         }
