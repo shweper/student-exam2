@@ -22,8 +22,10 @@ pipeline {
         stage('Build docker image') {
             steps{
                 echo "=======Start Build docker image======="
-                dir ('.'){
-                    sh 'docker build -t 030398/exam:web2 /home/ec2-user/student-exam2-master'
+                sh 'rm -rf student-exam2'
+                sh 'git clone https://github.com/shweper/student-exam2.git'
+                dir ('student-exam2'){
+                    sh 'docker build -t 030398/exam:web2 .'
                 }
             }
         }
